@@ -99,6 +99,7 @@ git commit
 
 ### List branches
 
+Show local branches
 ```bash
 git branch
 
@@ -108,6 +109,11 @@ git branch
 * main
 ```
 
+Show all branches, include remote
+```bash
+git branch -a
+```
+
 ### new branch 
 
 ```bash
@@ -115,7 +121,7 @@ git branch <name>
 ```
 ![branch new](./img/create-branch.png) 
 
-### change branch 
+### `git checkout <branch>`- change branch 
 
 ```bash
 git checkout <name>
@@ -212,6 +218,22 @@ git rebase -i HEAD~4
 ```bash
 git log
 ```
+
+Output:
+```bash
+commit 07279a6b73e4b95968c77d82f655ee58f4602437
+Author: derrykid <derry.yeh.dev@gmail.com>
+Date:   Fri Aug 11 13:48:31 2023 +0800
+
+    update git tutorial
+
+commit c1504f0f9e7c4a1fbf4fec7718da78db900c5b93
+Author: derrykid <derry.yeh.dev@gmail.com>
+Date:   Wed Aug 9 10:49:59 2023 +0800
+
+    push
+```
+The log message shows clearly the author, date, and commit message. **The commit message is very important to know what has been done.**
 
 ## HEAD
 
