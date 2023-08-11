@@ -167,6 +167,75 @@ git merge bugFix
 
 ![merge](./img/merge.png) 
 
+### merge conflict
+
+Scenario: There are 2 branches, `main` and `feature`. They both modify the `App.java`. While on `main` branch runnning `git merge feature`:
+
+```bash
+[derry@fed-x1 playg]$ git merge feature_class 
+Auto-merging sandbox/src/main/java/org/example/App.java
+CONFLICT (content): Merge conflict in sandbox/src/main/java/org/example/App.java
+Automatic merge failed; fix conflicts and then commit the result.
+```
+The merge conflics appeared. Message says it's in `App.java`. It also show on `git status`
+```bash
+[derry@fed-x1 playg]$ git status
+On branch main
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both modified:   sandbox/src/main/java/org/example/App.java
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+open the `App.java`, and the file has been modified by git:
+```java
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+<<<<<<< HEAD
+        System.out.println("I'm the world in main branch");
+=======
+        System.out.println("This is the feature message in feature branch");
+>>>>>>> feature_class
+    }
+}
+```
+
+Now we're on branch `main`, it's not possible to checkout another branch.
+```bash
+[derry@fed-x1 playg]$ git checkout feature_class 
+sandbox/src/main/java/org/example/App.java: needs merge
+error: you need to resolve your current index first
+```
+
+Now, resolve the conflict by modifying the `App.java`
+```java
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+        System.out.println("I'm the world in main branch");
+    }
+}
+```
+
+Now `add` and commit the change.
+```bash
+# after modify
+git add -A
+git commit -m "resolve the conflict"
+
+# then 
+[derry@fed-x1 playg]$ git status
+On branch main
+nothing to commit, working tree clean
+
+```
+
 ## rebase
 
 **Note that the branch we are on, will 'change the base' to another branch.** 
@@ -211,6 +280,13 @@ Open up a text editor, show which commits are about to be copied below the targe
 
 ```bash
 git rebase -i HEAD~4
+```
+
+## `git diff` - show difference between 2 commits
+
+```bash
+# the "^" means the previous one
+git diff HEAD^ HEAD
 ```
 
 ## Log
@@ -370,7 +446,7 @@ Don't need to put any other arguments to it.
 
 Works like `git push origin main` while it's on opposite direction
 
-## git pull
+## git pull - combination of `fetch, merge`
 
 Often, when you `git fetch`, you'd like to merge it with your local `origin/main`:
 
