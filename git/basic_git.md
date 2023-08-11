@@ -2,9 +2,94 @@
 
 [Learn git visual](https://learngitbranching.js.org) 
 
-## Commit to repo
-**We was on C1 commit** 
+## Config - configurations
 
+The global config file
+```bash
+~/.gitconfig
+```
+
+Project config
+```bash
+/project/.git/config
+```
+
+## Init a git in a project
+
+```bash
+# cd to the project root directory
+
+# run this
+git init
+```
+
+## `git status` - show working tree status
+
+Once create, modify, delete the files, see the status by
+```bash
+git status
+```
+
+Output
+```
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   git/basic_git.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	basic_bash_tutorial.sh
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+Git is aware of the changes, the tree has 2 status:
+- Untracked: Once modify, git knows you change, but you havn't said "hey I want this to commit"
+- Tracked: You add the files you want to commit, and git knows it
+
+When you first add files to an empty repository, they are all untracked. To get Git to track them, you need to stage them, or add them to the staging environment.
+
+## Git staging environment
+
+> One of the core functions of Git is the concepts of the Staging Environment, and the Commit.
+
+As you are working, you may be *adding, editing and removing files*. But whenever you hit a milestone or finish a part of the work, you should **add the files to a Staging Environment.**
+
+### `git add [<options>]`Add the files
+
+```bash
+# add one file
+git add thisFile.txt
+
+# to add all files
+git add -all # or use -A
+```
+
+#### Use `git add -A` over `git add .`
+
+`git add -A` staging *new, modify, delete*
+
+`git add .` staging *new, modify*, not **delete**. Also, sub-directory not works in some versions.
+
+Overall, I'd say `git add -A` is a safer option.
+
+
+## Commit to repo - git considers "save point"
+
+Adding commits keep track of our progress and changes as we work.
+
+**Note:** always add message to commits
+
+- `-a`: commit all files. (omit stagig, commit all. Sometimes it's tedious to use git add for small changes. but it's recommended to seperate staging and commit)
+- `-m`: message
+
+---
+
+Example: **We was on C1 commit** 
 ```bash
 git commit
 ```
